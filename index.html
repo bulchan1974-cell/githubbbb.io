@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nanthawat | Robotic Gaming Portfolio</title>
-    <!-- โหลด Font สายล้ำ และ Icon -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Prompt:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Nanthawat | Gaming Portfolio</title>
+    <!-- โหลด Font ทันสมัยและ Icon เท่ๆ -->
+    <link href="https://googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
-        /* สไตล์พื้นฐานโทน Mecha & Sci-Fi */
+        /* สไตล์พื้นฐานโทน Cyberpunk มืด-นีออน */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            background-color: #050811;
-            /* พื้นหลังลายตาราง Grid เลียนแบบระบบพิกัดหุ่นยนต์ */
+            background-color: #0b0f19;
             background-image: 
-                linear-gradient(rgba(0, 242, 254, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 242, 254, 0.03) 1px, transparent 1px),
-                radial-gradient(at 50% 0%, rgba(0, 242, 254, 0.1) 0px, transparent 50%);
-            background-size: 20px 20px, 20px 20px, 100% 100%;
-            color: #c8d3e6;
+                radial-gradient(at 0% 0%, rgba(0, 102, 204, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(234, 0, 112, 0.15) 0px, transparent 50%);
+            color: #e2e8f0;
             font-family: 'Prompt', sans-serif;
             line-height: 1.6;
             min-height: 100vh;
@@ -37,415 +33,273 @@
 
         /* คอนเทนเนอร์หลัก */
         .container {
-            max-width: 850px;
+            max-width: 800px;
             width: 100%;
             display: grid;
             grid-template-columns: 1fr;
             gap: 25px;
         }
+
         @media (min-width: 768px) {
             .container {
                 grid-template-columns: 320px 1fr;
             }
         }
 
-        /* กล่องสไตล์กลไกหุ่นยนต์ (Robotic HUD Panel) */
-        .robot-panel {
-            background: rgba(10, 17, 30, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid #1e3a5f;
-            /* ตัดมุมกล่องสไตล์ Sci-Fi Armor Plate */
-            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+        /* กล่องสไตล์นีออน (Glassmorphism + Neon) */
+        .neon-box {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
             padding: 30px;
-            box-shadow: inset 0 0 15px rgba(0, 242, 254, 0.05), 0 10px 30px rgba(0, 0, 0, 0.7);
-            position: relative;
-        }
-        /* เส้นมุมตกแต่งแผงเหล็ก */
-        .robot-panel::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 10px;
-            border-top: 2px solid #00f2fe;
-            border-left: 2px solid #00f2fe;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
         }
 
-        /* การ์ดโปรไฟล์ฝั่งซ้าย (Main AI Core) */
+        /* การ์ดโปรไฟล์ฝั่งซ้าย */
         .profile-side {
             text-align: center;
-            border-left: 3px solid #00f2fe;
+            border-top: 4px solid #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
         }
-        
-        /* กรอบเป้าเล็งรูปภาพ (Targeting Matrix) */
-        .avatar-container {
+
+        .avatar-wrapper {
             position: relative;
-            width: 140px;
-            height: 140px;
+            width: 130px;
+            height: 130px;
             margin: 0 auto 20px;
-            padding: 8px;
-            border: 1px dashed rgba(0, 242, 254, 0.4);
         }
-        .avatar-container::before, .avatar-container::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-color: #00f2fe;
-            border-style: solid;
-        }
-        .avatar-container::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
-        .avatar-container::after { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
 
         .profile-img {
             width: 100%;
             height: 100%;
+            border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #1e3a5f;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            border: 3px solid #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
         }
 
-        /* สเตตัสระบบ */
         .status-badge {
             position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #00f2fe;
-            color: #050811;
-            font-size: 10px;
-            font-weight: 900;
-            padding: 2px 10px;
+            bottom: 5px;
+            right: 5px;
+            background: #00ff66;
+            color: #000;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00ff66;
             font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
-            clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 0.8; }
-            50% { opacity: 1; box-shadow: 0 0 15px rgba(0, 242, 254, 0.8); }
-            100% { opacity: 0.8; }
         }
 
         .name {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             color: #fff;
-            margin-top: 10px;
             margin-bottom: 5px;
-            letter-spacing: 0.5px;
         }
+
         .gamer-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 13px;
+            font-size: 14px;
             color: #00f2fe;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: inline-block;
-            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
-            padding-bottom: 4px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
         }
+
         .bio {
-            font-size: 13px;
-            color: #8fa0ba;
-            margin-bottom: 25px;
-            text-align: justify;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 12px;
-            border-radius: 4px;
-            border: 1px solid rgba(30, 58, 95, 0.4);
-        }
-
-        /* ปุ่มประวัติส่วนตัวสไตล์โรบอทชาร์จพลังงาน */
-        .history-btn-wrapper {
-            margin-bottom: 20px;
-        }
-        .history-trigger-btn {
-            width: 100%;
-            background: linear-gradient(90deg, rgba(255, 59, 48, 0.1), rgba(255, 59, 48, 0.2));
-            border: 1px solid #ff3b30;
-            color: #ff3b30;
-            font-family: 'Orbitron', 'Prompt', sans-serif;
             font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            padding: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-            text-shadow: 0 0 5px rgba(255, 59, 48, 0.5);
-            box-shadow: 0 0 10px rgba(255, 59, 48, 0.1);
-        }
-        .history-trigger-btn:hover {
-            background: #ff3b30;
-            color: #050811;
-            box-shadow: 0 0 20px rgba(255, 59, 48, 0.6);
-            text-shadow: none;
-            transform: scale(1.02);
-        }
-        .history-trigger-btn i {
-            margin-right: 8px;
+            color: #94a3b8;
+            margin-bottom: 25px;
         }
 
-        /* ปุ่มเชื่อมต่อระบบโซเชียล */
+        /* โซเชียลมีเดีย */
         .social-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-        .social-btn {
-            background: rgba(30, 58, 95, 0.2);
-            border: 1px solid #1e3a5f;
-            color: #00f2fe;
-            padding: 12px 0;
-            font-size: 16px;
-            text-decoration: none;
-            transition: all 0.25s ease;
-            clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
-        }
-        .social-btn:hover {
-            color: #050811;
-            background: #00f2fe;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
-            transform: translateY(-2px);
-            border-color: #00f2fe;
+            gap: 10px;
         }
 
-        /* ฝั่งขวา: รายละเอียดระบบและยุทโธปกรณ์ */
+        .social-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #94a3b8;
+            padding: 10px 0;
+            border-radius: 10px;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .social-btn:hover {
+            color: #fff;
+            background: #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* ข้อมูลรายละเอียดฝั่งขวา */
         .content-side {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
+
         .section-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 16px;
+            font-size: 18px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             color: #fff;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid #1e3a5f;
-            padding-bottom: 10px;
-        }
-        .section-title i {
-            color: #ff3b30;
-            text-shadow: 0 0 8px rgba(255, 59, 48, 0.6);
+            gap: 10px;
+            border-left: 4px solid #ea0070;
+            padding-left: 10px;
         }
 
-        /* คลังสกิล (Weapon Systems / Tech Arsenal) */
+        /* คลังสกิล */
         .skills-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-        }
-        .skill-badge {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid #1e3a5f;
-            color: #a2b4ce;
-            padding: 8px 16px;
-            font-size: 12px;
-            font-family: 'Orbitron', 'Prompt', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: all 0.2s;
-            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-        }
-        .skill-badge:hover {
-            border-color: #00f2fe;
-            color: #fff;
-            background: rgba(0, 242, 254, 0.05);
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+            gap: 10px;
         }
 
-        /* แผงแสดงผลงาน (Mission Log / Modules) */
+        .skill-badge {
+            background: rgba(234, 0, 112, 0.1);
+            border: 1px solid rgba(234, 0, 112, 0.2);
+            color: #ff4a9e;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .skill-badge:hover {
+            background: #ea0070;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(234, 0, 112, 0.4);
+        }
+
+        /* การ์ดโชว์ผลงาน / เกมที่ชอบ */
         .showcase-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
         }
+
         @media (min-width: 500px) {
             .showcase-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
+
         .showcase-item {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(30, 58, 95, 0.6);
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
             transition: all 0.3s ease;
-            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
         }
+
         .showcase-item:hover {
-            background: rgba(10, 17, 30, 0.6);
-            border-color: #00f2fe;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 242, 254, 0.3);
             transform: scale(1.02);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
         }
+
+        .showcase-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .showcase-desc {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
         .item-icon {
-            font-size: 26px;
+            font-size: 24px;
             color: #00f2fe;
-            margin-bottom: 12px;
-        text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
-}
-.showcase-title {
-font-family: 'Orbitron', 'Prompt', sans-serif;
-font-size: 15px;
-font-weight: 700;
-color: #fff;
-margin-bottom: 8px;
-letter-spacing: 0.5px;
-}
-.showcase-desc {
-font-size: 12px;
-color: #8fa0ba;
-}
-/* หน้าต่างประวัติเด้งขึ้นมา (UI Modal Overlay) */
-.modal-overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(5, 8, 17, 0.9);
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 9999;
-opacity: 0;
-pointer-events: none;
-transition: opacity 0.3s ease;
-padding: 20px;
-}
-.modal-overlay.active {
-opacity: 1;
-pointer-events: auto;
-}
-.modal-content {
-max-width: 500px;
-width: 100%;
-background: #0a111e;
-border: 2px solid #ff3b30;
-box-shadow: 0 0 30px rgba(255, 59, 48, 0.3);
-padding: 30px;
-clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
-transform: scale(0.8);
-transition: transform 0.3s ease;
-}
-.modal-overlay.active .modal-content {
-transform: scale(1);
-}
-.modal-header {
-font-family: 'Orbitron', sans-serif;
-color: #fff;
-font-size: 20px;
-border-bottom: 1px solid rgba(255, 59, 48, 0.3);
-padding-bottom: 10px;
-margin-bottom: 20px;
-display: flex;
-align-items: center;
-gap: 10px;
-}
-.history-data-list {
-list-style: none;
-display: flex;
-flex-direction: column;
-gap: 12px;
-margin-bottom: 25px;
-}
-.history-data-list li {
-font-size: 14px;
-border-left: 2px solid #00f2fe;
-padding-left: 10px;
-background: rgba(255, 255, 255, 0.02);
-padding-top: 6px;
-padding-bottom: 6px;
-}
-.history-data-list strong {
-color: #00f2fe;
-font-family: 'Orbitron', 'Prompt', sans-serif;
-}
-.close-btn {
-width: 100%;
-background: rgba(255, 255, 255, 0.05);
-border: 1px solid #1e3a5f;
-color: #8fa0ba;
-padding: 10px;
-cursor: pointer;
-font-family: 'Orbitron', sans-serif;
-font-size: 12px;
-letter-spacing: 1px;
-transition: all 0.2s;
-}
-.close-btn:hover {
-background: rgba(255, 59, 48, 0.1);
-border-color: #ff3b30;
-color: #ff3b30;
-}
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="container">
+        
+        <!-- ฝั่งซ้าย: ข้อมูลส่วนตัวหลัก -->
+        <div class="neon-box profile-side">
+            <div class="avatar-wrapper">
+                <!-- ใส่ลิงก์รูปภาพ Isagi เรียบร้อยแล้วครับ -->
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY-LfjXbZT6VHNsz1wJG-5LeTht28FoyJhU1mg3ovDig&s=10" alt="Profile" class="profile-img">
+                <span class="status-badge">ONLINE</span>
+            </div>
+            
+            <h1 class="name">นันทวัฒน์ กุลจันทร์</h1>
+            <p class="gamer-tag">@WebDev_Gamer</p>
+            
+            <p class="bio">
+                ยินดีที่ได้รู้จักครับ! ผมเป็นนักพัฒนาเว็บสายเลือดเกมเมอร์ ที่หลงใหลในการเขียนโค้ดและหลงรักในการกดสูตรคอมโบ รักความท้าทายทั้งในโลกของโปรแกรมมิ่งและในสมรภูมิเกมครับ
+            </p>
+            
+            <!-- โซเชียลมีเดีย -->
+            <div class="social-grid">
+                <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="mailto:your-email@example.com" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://discord.com" target="_blank" class="social-btn" title="Discord"><i class="fab fa-discord"></i></a>
+            </div>
+        </div>
+        
+        <!-- ฝั่งขวา: รายละเอียดทักษะและสไตล์ -->
+        <div class="content-side">
+            
+            <!-- ส่วนทักษะ -->
+            <div class="neon-box">
+                <h2 class="section-title"><i class="fas fa-code"></i> Tech Arsenal (ทักษะโปรแกรมมิ่ง)</h2>
+                <div class="skills-grid">
+                    <span class="skill-badge">HTML5</span>
+                    <span class="skill-badge">CSS3 / Flexbox</span>
+                    <span class="skill-badge">JavaScript</span>
+                    <span class="skill-badge">Git & GitHub</span>
+                    <span class="skill-badge">Responsive Design</span>
+                    <span class="skill-badge">UI/UX Design</span>
+                </div>
+            </div>
+            
+            <!-- ส่วนโชว์ผลงานและเกมโปรด -->
+            <div class="neon-box">
+                <h2 class="section-title"><i class="fas fa-gamepad"></i> My Showcase & Interests</h2>
+                <div class="showcase-grid">
+                    
+                    <div class="showcase-item">
+                        <div class="item-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3 class="showcase-title">Web Projects</h3>
+                        <p class="showcase-desc">สร้างสรรค์เว็บเพจที่ตอบสนองไว โหลดเร็ว และมีดีไซน์ที่สวยงามรองรับทุกอุปกรณ์</p>
+                    </div>
+                    
+                    <div class="showcase-item">
+                        <div class="item-icon"><i class="fas fa-trophy"></i></div>
+                        <h3 class="showcase-title">Gaming Zone</h3>
+                        <p class="showcase-desc">ชอบเล่นเกมแนว Open-World, RPG และ FPS ที่ต้องใช้การวางกลยุทธ์และการตัดสินใจที่แม่นยำ</p>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
 
-SYS ACTIVE
-นันทวัฒน์ กุลจันทร์
-Core // @WebDev_Gamer
- ประวัติระบบ
-
-ยินดีที่ได้รู้จักครับ! ผมเป็นนักพัฒนาเว็บสายเลือดเกมเมอร์ ที่หลงใหลในการเขียนโค้ดและหลงรักในการกดสูตรคอมโบ รักความท้าทายทั้งในโลกของโปรแกรมมิ่งและในสมรภูมิเกมครับ
-
-
-
-
-
- Tech Arsenal (ระบบปฏิบัติการ)
-
-HTML5.sys
-CSS3.cfg
-JavaScript.exe
-Git & GitHub
-Responsive Matrix
-UI/UX Interface
-
- Mission Logs & Database
-
-
-
-Web Projects
-สร้างสรรค์เว็บเพจที่ตอบสนองไว โหลดเร็ว และมีดีไซน์จักรกลที่สวยงามรองรับทุกอุปกรณ์
-
-
-
-Gaming Zone
-ชอบเล่นเกมแนว Open-World, RPG และ FPS ที่ต้องใช้การวางกลยุทธ์และการตัดสินใจที่แม่นยำระดับ AI
-
-
-
- 
- BIOGRAPHY // ข้อมูลประวัติ
-
-
-NAME: นันทวัฒน์ กุลจันทร์
-ROLE: Web Developer / Hardcore Gamer
-FAVORITE GAME GENRES: Open-World, RPG, FPS Strategy
-MISSION: สร้างสรรค์ UI/UX ข้ามขีดจำกัดด้วยโค้ดที่เฉียบคมและทรงพลัง
-STATUS: กำลังพัฒนาโปรเจกต์และอัปเกรดฐานข้อมูลอย่างต่อเนื่อง...
-
-CLOSE INTERFACE
-
-const modal = document.getElementById('historyModal');
-const openBtn = document.getElementById('openModalBtn');
-const closeBtn = document.getElementById('closeModalBtn');
-openBtn.addEventListener('click', () => {
-modal.classList.add('active');
-});
-closeBtn.addEventListener('click', () => {
-modal.classList.remove('active');
-});
-modal.addEventListener('click', (e) => {
-if (e.target === modal) {
-modal.classList.remove('active');
-}
-});
+</body>
+</html>
