@@ -3,169 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แนะนำตัวเอง | My Portfolio</title>
+    <title>Nanthawat | Gaming Portfolio</title>
+    <!-- โหลด Font ทันสมัยและ Icon เท่ๆ -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
     <style>
-        /* ตั้งค่าสไตล์พื้นฐาน */
+        /* สไตล์พื้นฐานโทน Cyberpunk มืด-นีออน */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: #0b0f19;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(0, 102, 204, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(234, 0, 112, 0.15) 0px, transparent 50%);
+            color: #e2e8f0;
+            font-family: 'Prompt', sans-serif;
             line-height: 1.6;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
-        /* การ์ดแนะนำตัว */
-        .profile-card {
-            background: #ffffff;
-            max-width: 450px;
+        /* คอนเทนเนอร์หลัก */
+        .container {
+            max-width: 800px;
             width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 320px 1fr;
+            }
+        }
+
+        /* กล่องสไตล์นีออน (Glassmorphism + Neon) */
+        .neon-box {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        /* การ์ดโปรไฟล์ฝั่งซ้าย */
+        .profile-side {
             text-align: center;
-            transition: transform 0.3s;
+            border-top: 4px solid #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
         }
 
-        .profile-card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* ส่วนหัวการ์ด (สีพื้นหลังด้านบน) */
-        .card-header {
-            background: linear-gradient(135deg, #24292e, #4a4a4a); /* สีโทนเข้มแบบ GitHub */
-            height: 120px;
-        }
-
-        /* รูปโปรไฟล์ */
-        .profile-img {
+        .avatar-wrapper {
+            position: relative;
             width: 130px;
             height: 130px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #ffffff;
-            margin-top: -65px;
-            background-color: #ddd;
+            margin: 0 auto 20px;
         }
 
-        /* ข้อมูลรายละเอียด */
-        .card-body {
-            padding: 30px 20px;
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: #00ff66;
+            color: #000;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00ff66;
+            font-family: 'Orbitron', sans-serif;
         }
 
         .name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #24292e;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
             margin-bottom: 5px;
         }
 
-        .job-title {
-            font-size: 16px;
-            color: #0066cc;
-            font-weight: 600;
-            margin-bottom: 15px;
+        .gamer-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: #00f2fe;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
         }
 
         .bio {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 25px;
-            padding: 0 10px;
-        }
-
-        /* ทักษะความสามารถ */
-        .skills-container {
+            font-size: 14px;
+            color: #94a3b8;
             margin-bottom: 25px;
         }
 
-        .skill-tag {
-            display: inline-block;
-            background-color: #e1e4e8;
-            color: #24292e;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin: 4px;
-            font-weight: 500;
+        /* โซเชียลมีเดีย */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
         }
 
-        /* ปุ่มติดต่อ / Social Links */
-        .social-links a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            background-color: #24292e;
-            color: #ffffff;
-            border-radius: 50%;
-            margin: 0 8px;
+        .social-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #94a3b8;
+            padding: 10px 0;
+            border-radius: 10px;
+            font-size: 18px;
             text-decoration: none;
-            transition: background-color 0.3s, transform 0.2s;
-            font-weight: bold;
+            transition: all 0.2s ease;
         }
 
-        .social-links a:hover {
-            background-color: #0066cc;
-            transform: scale(1.1);
+        .social-btn:hover {
+            color: #fff;
+            background: #00f2fe;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            transform: translateY(-3px);
         }
 
-        .social-links a.github-btn {
-            background-color: #24292e;
+        /* ข้อมูลรายละเอียดฝั่งขวา */
+        .content-side {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
-        
-        .social-links a.contact-btn {
-            background-color: #28a745;
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid #ea0070;
+            padding-left: 10px;
+        }
+
+        /* คลังสกิล */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-badge {
+            background: rgba(234, 0, 112, 0.1);
+            border: 1px solid rgba(234, 0, 112, 0.2);
+            color: #ff4a9e;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .skill-badge:hover {
+            background: #ea0070;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(234, 0, 112, 0.4);
+        }
+
+        /* การ์ดโชว์ผลงาน / เกมที่ชอบ */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 500px) {
+            .showcase-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .showcase-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .showcase-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 242, 254, 0.3);
+            transform: scale(1.02);
+        }
+
+        .showcase-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .showcase-desc {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .item-icon {
+            font-size: 24px;
+            color: #00f2fe;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="profile-card">
-        <!-- ส่วนหัวการ์ด -->
-        <div class="card-header"></div>
+    <div class="container">
         
-        <!-- รูปภาพโปรไฟล์ (เปลี่ยน URL รูปของคุณที่ src) -->
-        <img src="https://placeholder.com" alt="Profile Picture" class="profile-img">
-        
-        <div class="card-body">
-            <!-- ชื่อของคุณ -->
-            <div class="name">ชื่อ นายนันทวัฒน์ กุลจันทร์</div>
-            <!-- ตำแหน่ง/สิ่งที่สนใจ -->
-            <div class="job-title">Web Developer / Designer</div>
+        <!-- ฝั่งซ้าย: ข้อมูลส่วนตัวหลัก -->
+        <div class="neon-box profile-side">
+            <div class="avatar-wrapper">
+                <!-- นำ URL รูปของคุณมาใส่แทนที่ลิงก์ด้านล่างนี้ได้เลย -->
+                <img src="https://unsplash.com" alt="Profile" class="profile-img">
+                <span class="status-badge">ONLINE</span>
+            </div>
             
-            <!-- คำอธิบายตัวเองสั้นๆ -->
+            <h1 class="name">นันทวัฒน์ กุลจันทร์</h1>
+            <p class="gamer-tag">@WebDev_Gamer</p>
+            
             <p class="bio">
-                สวัสดีครับ ยินดีที่ได้รู้จัก ผมติดเกม
+                ยินดีที่ได้รู้จักครับ! ผมเป็นนักพัฒนาเว็บสายเลือดเกมเมอร์ ที่หลงใหลในการเขียนโค้ดและหลงรักในการกดสูตรคอมโบ รักความท้าทายทั้งในโลกของโปรแกรมมิ่งและในสมรภูมิเกมครับ
             </p>
             
-            <!-- ทักษะความสามารถ (เพิ่ม/ลด ได้ตามสะดวก) -->
-            <div class="skills-container">
-                <span class="skill-tag">HTML5</span>
-                <span class="skill-tag">CSS3</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">Git / GitHub</span>
-            </div>
-            
-            <!-- ช่องทางการติดตาม -->
-            <div class="social-links">
-                <!-- ใส่ลิงก์ GitHub ของคุณที่ href -->
-                <a href="https://github.com" target="_blank" class="github-btn" title="GitHub">GH</a>
-                <!-- ใส่ลิงก์สำหรับติดต่อ เช่น อีเมล หรือ Facebook -->
-                <a href="mailto:your-email@example.com" class="contact-btn" title="Email">✉</a>
+            <!-- โซเชียลมีเดียอัปเกรดเป็นไอคอน -->
+            <div class="social-grid">
+                <!-- ใส่ลิงก์ของคุณที่ href -->
+                <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="mailto:your-email@example.com" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://discord.com" target="_blank" class="social-btn" title="Discord"><i class="fab fa-discord"></i></a>
             </div>
         </div>
+        
+        <!-- ฝั่งขวา: รายละเอียดทักษะและสไตล์ -->
+        <div class="content-side">
+            
+            <!-- ส่วนทักษะ -->
+            <div class="neon-box">
+                <h2 class="section-title"><i class="fas fa-code"></i> Tech Arsenal (ทักษะโปรแกรมมิ่ง)</h2>
+                <div class="skills-grid">
+                    <span class="skill-badge">HTML5</span>
+                    <span class="skill-badge">CSS3 / Flexbox</span>
+                    <span class="skill-badge">JavaScript</span>
+                    <span class="skill-badge">Git & GitHub</span>
+                    <span class="skill-badge">Responsive Design</span>
+                    <span class="skill-badge">UI/UX Design</span>
+                </div>
+            </div>
+            
+            <!-- ส่วนโชว์ผลงานและเกมโปรด -->
+            <div class="neon-box">
+                <h2 class="section-title"><i class="fas fa-gamepad"></i> My Showcase & Interests</h2>
+                <div class="showcase-grid">
+                    
+                    <div class="showcase-item">
+                        <div class="item-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3 class="showcase-title">Web Projects</h3>
+                        <p class="showcase-desc">สร้างสรรค์เว็บเพจที่ตอบสนองไว โหลดเร็ว และมีดีไซน์ที่สวยงามรองรับทุกอุปกรณ์</p>
+                    </div>
+                    
+                    <div class="showcase-item">
+                        <div class="item-icon"><i class="fas fa-trophy"></i></div>
+                        <h3 class="showcase-title">Gaming Zone</h3>
+                        <p class="showcase-desc">ชอบเล่นเกมแนว Open-World, RPG และ FPS ที่ต้องใช้การวางกลยุทธ์และการตัดสินใจที่แม่นยำ</p>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+        
     </div>
 
 </body>
