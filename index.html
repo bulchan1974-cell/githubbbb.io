@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nanthawat | Robotic Gaming Portfolio</title>
     <!-- โหลด Font สายล้ำ และ Icon -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Prompt:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
@@ -159,7 +159,38 @@
             border: 1px solid rgba(30, 58, 95, 0.4);
         }
 
-        /* ปุ่มเชื่อมต่อระบบ (Interface Links) */
+        /* ปุ่มประวัติส่วนตัวสไตล์โรบอทชาร์จพลังงาน */
+        .history-btn-wrapper {
+            margin-bottom: 20px;
+        }
+        .history-trigger-btn {
+            width: 100%;
+            background: linear-gradient(90deg, rgba(255, 59, 48, 0.1), rgba(255, 59, 48, 0.2));
+            border: 1px solid #ff3b30;
+            color: #ff3b30;
+            font-family: 'Orbitron', 'Prompt', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+            text-shadow: 0 0 5px rgba(255, 59, 48, 0.5);
+            box-shadow: 0 0 10px rgba(255, 59, 48, 0.1);
+        }
+        .history-trigger-btn:hover {
+            background: #ff3b30;
+            color: #050811;
+            box-shadow: 0 0 20px rgba(255, 59, 48, 0.6);
+            text-shadow: none;
+            transform: scale(1.02);
+        }
+        .history-trigger-btn i {
+            margin-right: 8px;
+        }
+
+        /* ปุ่มเชื่อมต่อระบบโซเชียล */
         .social-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -203,7 +234,7 @@
             padding-bottom: 10px;
         }
         .section-title i {
-            color: #ff3b30; /* ไฟสถานะสีแดงตัดเลเซอร์ */
+            color: #ff3b30;
             text-shadow: 0 0 8px rgba(255, 59, 48, 0.6);
         }
 
@@ -260,35 +291,107 @@
             font-size: 26px;
             color: #00f2fe;
             margin-bottom: 12px;
-            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
-        }
-        .showcase-title {
-            font-family: 'Orbitron', 'Prompt', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-        .showcase-desc {
-            font-size: 12px;
-            color: #8fa0ba;
-        }
-    </style>
-</head>
-<body>
+text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+}
+.showcase-title {
+font-family: 'Orbitron', 'Prompt', sans-serif;
+font-size: 15px;
+font-weight: 700;
+color: #fff;
+margin-bottom: 8px;
+letter-spacing: 0.5px;
+}
+.showcase-desc {
+font-size: 12px;
+color: #8fa0ba;
+}
+/* หน้าต่างประวัติเด้งขึ้นมา (UI Modal Overlay) */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(5, 8, 17, 0.9);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s ease;
+padding: 20px;
+}
+.modal-overlay.active {
+opacity: 1;
+pointer-events: auto;
+}
+.modal-content {
+max-width: 500px;
+width: 100%;
+background: #0a111e;
+border: 2px solid #ff3b30;
+box-shadow: 0 0 30px rgba(255, 59, 48, 0.3);
+padding: 30px;
+clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+transform: scale(0.8);
+transition: transform 0.3s ease;
+}
+.modal-overlay.active .modal-content {
+transform: scale(1);
+}
+.modal-header {
+font-family: 'Orbitron', sans-serif;
+color: #fff;
+font-size: 20px;
+border-bottom: 1px solid rgba(255, 59, 48, 0.3);
+padding-bottom: 10px;
+margin-bottom: 20px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.history-data-list {
+list-style: none;
+display: flex;
+flex-direction: column;
+gap: 12px;
+margin-bottom: 25px;
+}
+.history-data-list li {
+font-size: 14px;
+border-left: 2px solid #00f2fe;
+padding-left: 10px;
+background: rgba(255, 255, 255, 0.02);
+padding-top: 6px;
+padding-bottom: 6px;
+}
+.history-data-list strong {
+color: #00f2fe;
+font-family: 'Orbitron', 'Prompt', sans-serif;
+}
+.close-btn {
+width: 100%;
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid #1e3a5f;
+color: #8fa0ba;
+padding: 10px;
+cursor: pointer;
+font-family: 'Orbitron', sans-serif;
+font-size: 12px;
+letter-spacing: 1px;
+transition: all 0.2s;
+}
+.close-btn:hover {
+background: rgba(255, 59, 48, 0.1);
+border-color: #ff3b30;
+color: #ff3b30;
+}
 
-    <div class="container">
-        
-        <!-- ฝั่งซ้าย: ข้อมูลส่วนตัวหลัก (AI CORE PANEL) -->
-        <div class="robot-panel profile-side">
-            <div class="avatar-container">
-                <!-- รูปภาพโปรไฟล์สไตล์เป้าเล็งหุ่นยนต์ -->
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY-LfjXbZT6VHNsz1wJG-5LeTht28FoyJhU1mg3ovDig&s=10" alt="Robot Core" class="profile-img">
-                <span class="status-badge">SYS ACTIVE</span>
-            </div>
-            
-            <h1 class="name">นันทวัฒน์ กุลจันทร์</h1>
-            <p class="gamer-tag">Core // @WebDev_Gamer</p>
-            
-            <p class="bio">
+
+SYS ACTIVE
+นันทวัฒน์ กุลจันทร์
+Core // @WebDev_Gamer
+ ประวัติระบบ
+
+ยินดีที่ได้รู้จักครับ! ผมเป็นนักพัฒนาเว็บสายเลือดเกมเมอร์ ที่หลงใหลในการเขียนโค้ดและหลงรักในการกดสูตรคอมโบ รักความท้าทายทั้งในโลกของโปรแกรมมิ่งและในสมรภูมิเกมครับ
