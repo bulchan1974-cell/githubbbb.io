@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แนะนำตัวเอง | My Portfolio</title>
+    <style>
+        /* ตั้งค่าสไตล์พื้นฐาน */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* การ์ดแนะนำตัว */
+        .profile-card {
+            background: #ffffff;
+            max-width: 450px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* ส่วนหัวการ์ด (สีพื้นหลังด้านบน) */
+        .card-header {
+            background: linear-gradient(135deg, #24292e, #4a4a4a); /* สีโทนเข้มแบบ GitHub */
+            height: 120px;
+        }
+
+        /* รูปโปรไฟล์ */
+        .profile-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ffffff;
+            margin-top: -65px;
+            background-color: #ddd;
+        }
+
+        /* ข้อมูลรายละเอียด */
+        .card-body {
+            padding: 30px 20px;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #24292e;
+            margin-bottom: 5px;
+        }
+
+        .job-title {
+            font-size: 16px;
+            color: #0066cc;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        /* ทักษะความสามารถ */
+        .skills-container {
+            margin-bottom: 25px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background-color: #e1e4e8;
+            color: #24292e;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 4px;
+            font-weight: 500;
+        }
+
+        /* ปุ่มติดต่อ / Social Links */
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #24292e;
+            color: #ffffff;
+            border-radius: 50%;
+            margin: 0 8px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: bold;
+        }
+
+        .social-links a:hover {
+            background-color: #0066cc;
+            transform: scale(1.1);
+        }
+
+        .social-links a.github-btn {
+            background-color: #24292e;
+        }
+        
+        .social-links a.contact-btn {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-card">
+        <!-- ส่วนหัวการ์ด -->
+        <div class="card-header"></div>
+        
+        <!-- รูปภาพโปรไฟล์ (เปลี่ยน URL รูปของคุณที่ src) -->
+        <img src="https://placeholder.com" alt="Profile Picture" class="profile-img">
+        
+        <div class="card-body">
+            <!-- ชื่อของคุณ -->
+            <div class="name">ชื่อ-นามสกุล ของคุณ</div>
+            <!-- ตำแหน่ง/สิ่งที่สนใจ -->
+            <div class="job-title">Web Developer / Designer</div>
+            
+            <!-- คำอธิบายตัวเองสั้นๆ -->
+            <p class="bio">
+                สวัสดีครับ/ค่ะ! ยินดีที่ได้รู้จัก ผมเป็นคนที่หลงใหลในการเขียนโค้ดและสร้างสรรค์เว็บไซต์ ชอบเรียนรู้เทคโนโลยีใหม่ๆ และพัฒนาตัวเองอยู่เสมอ
+            </p>
+            
+            <!-- ทักษะความสามารถ (เพิ่ม/ลด ได้ตามสะดวก) -->
+            <div class="skills-container">
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Git / GitHub</span>
+            </div>
+            
+            <!-- ช่องทางการติดตาม -->
+            <div class="social-links">
+                <!-- ใส่ลิงก์ GitHub ของคุณที่ href -->
+                <a href="https://github.com" target="_blank" class="github-btn" title="GitHub">GH</a>
+                <!-- ใส่ลิงก์สำหรับติดต่อ เช่น อีเมล หรือ Facebook -->
+                <a href="mailto:your-email@example.com" class="contact-btn" title="Email">✉</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
