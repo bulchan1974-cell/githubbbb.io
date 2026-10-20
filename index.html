@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nanthawat | Gaming Portfolio</title>
-    <!-- โหลด Font ทันสมัยและ Icon เท่ๆ -->
+    <title>Nanthawat | Robotic Gaming Portfolio</title>
+    <!-- โหลด Font สายล้ำ และ Icon -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
-        /* สไตล์พื้นฐานโทน Cyberpunk มืด-นีออน */
+        /* สไตล์พื้นฐานโทน Mecha & Sci-Fi */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            background-color: #0b0f19;
+            background-color: #050811;
+            /* พื้นหลังลายตาราง Grid เลียนแบบระบบพิกัดหุ่นยนต์ */
             background-image: 
-                radial-gradient(at 0% 0%, rgba(0, 102, 204, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(234, 0, 112, 0.15) 0px, transparent 50%);
-            color: #e2e8f0;
+                linear-gradient(rgba(0, 242, 254, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 254, 0.03) 1px, transparent 1px),
+                radial-gradient(at 50% 0%, rgba(0, 242, 254, 0.1) 0px, transparent 50%);
+            background-size: 20px 20px, 20px 20px, 100% 100%;
+            color: #c8d3e6;
             font-family: 'Prompt', sans-serif;
             line-height: 1.6;
             min-height: 100vh;
@@ -33,203 +37,242 @@
 
         /* คอนเทนเนอร์หลัก */
         .container {
-            max-width: 800px;
+            max-width: 850px;
             width: 100%;
             display: grid;
             grid-template-columns: 1fr;
             gap: 25px;
         }
-
         @media (min-width: 768px) {
             .container {
                 grid-template-columns: 320px 1fr;
             }
         }
 
-        /* กล่องสไตล์นีออน (Glassmorphism + Neon) */
-        .neon-box {
-            background: rgba(17, 24, 39, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+        /* กล่องสไตล์กลไกหุ่นยนต์ (Robotic HUD Panel) */
+        .robot-panel {
+            background: rgba(10, 17, 30, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1e3a5f;
+            /* ตัดมุมกล่องสไตล์ Sci-Fi Armor Plate */
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
             padding: 30px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
+            box-shadow: inset 0 0 15px rgba(0, 242, 254, 0.05), 0 10px 30px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+        /* เส้นมุมตกแต่งแผงเหล็ก */
+        .robot-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid #00f2fe;
+            border-left: 2px solid #00f2fe;
         }
 
-        /* การ์ดโปรไฟล์ฝั่งซ้าย */
+        /* การ์ดโปรไฟล์ฝั่งซ้าย (Main AI Core) */
         .profile-side {
             text-align: center;
-            border-top: 4px solid #00f2fe;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+            border-left: 3px solid #00f2fe;
         }
-
-        .avatar-wrapper {
+        
+        /* กรอบเป้าเล็งรูปภาพ (Targeting Matrix) */
+        .avatar-container {
             position: relative;
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             margin: 0 auto 20px;
+            padding: 8px;
+            border: 1px dashed rgba(0, 242, 254, 0.4);
         }
+        .avatar-container::before, .avatar-container::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: #00f2fe;
+            border-style: solid;
+        }
+        .avatar-container::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
+        .avatar-container::after { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
 
         .profile-img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #00f2fe;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+            border: 2px solid #1e3a5f;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
         }
 
+        /* สเตตัสระบบ */
         .status-badge {
             position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background: #00ff66;
-            color: #000;
-            font-size: 11px;
-            font-weight: bold;
-            padding: 2px 8px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #00ff66;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00f2fe;
+            color: #050811;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 2px 10px;
             font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; box-shadow: 0 0 15px rgba(0, 242, 254, 0.8); }
+            100% { opacity: 0.8; }
         }
 
         .name {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: #fff;
+            margin-top: 10px;
             margin-bottom: 5px;
+            letter-spacing: 0.5px;
         }
-
         .gamer-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             color: #00f2fe;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 15px;
-            text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+            margin-bottom: 20px;
+            display: inline-block;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+            padding-bottom: 4px;
         }
-
         .bio {
-            font-size: 14px;
-            color: #94a3b8;
+            font-size: 13px;
+            color: #8fa0ba;
             margin-bottom: 25px;
+            text-align: justify;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            border-radius: 4px;
+            border: 1px solid rgba(30, 58, 95, 0.4);
         }
 
-        /* โซเชียลมีเดีย */
+        /* ปุ่มเชื่อมต่อระบบ (Interface Links) */
         .social-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 8px;
         }
-
         .social-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: #94a3b8;
-            padding: 10px 0;
-            border-radius: 10px;
-            font-size: 18px;
+            background: rgba(30, 58, 95, 0.2);
+            border: 1px solid #1e3a5f;
+            color: #00f2fe;
+            padding: 12px 0;
+            font-size: 16px;
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
+            clip-path: polygon(5px 0, 100% 0, 100% calc(100% - 5px), calc(100% - 5px) 100%, 0 100%, 0 5px);
         }
-
         .social-btn:hover {
-            color: #fff;
+            color: #050811;
             background: #00f2fe;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+            transform: translateY(-2px);
+            border-color: #00f2fe;
         }
 
-        /* ข้อมูลรายละเอียดฝั่งขวา */
+        /* ฝั่งขวา: รายละเอียดระบบและยุทโธปกรณ์ */
         .content-side {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-
         .section-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 18px;
+            font-size: 16px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             color: #fff;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            border-left: 4px solid #ea0070;
-            padding-left: 10px;
+            gap: 12px;
+            border-bottom: 1px solid #1e3a5f;
+            padding-bottom: 10px;
+        }
+        .section-title i {
+            color: #ff3b30; /* ไฟสถานะสีแดงตัดเลเซอร์ */
+            text-shadow: 0 0 8px rgba(255, 59, 48, 0.6);
         }
 
-        /* คลังสกิล */
+        /* คลังสกิล (Weapon Systems / Tech Arsenal) */
         .skills-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
-
         .skill-badge {
-            background: rgba(234, 0, 112, 0.1);
-            border: 1px solid rgba(234, 0, 112, 0.2);
-            color: #ff4a9e;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.3s;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #1e3a5f;
+            color: #a2b4ce;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-family: 'Orbitron', 'Prompt', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.2s;
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
         }
-
         .skill-badge:hover {
-            background: #ea0070;
+            border-color: #00f2fe;
             color: #fff;
-            box-shadow: 0 0 12px rgba(234, 0, 112, 0.4);
+            background: rgba(0, 242, 254, 0.05);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
         }
 
-        /* การ์ดโชว์ผลงาน / เกมที่ชอบ */
+        /* แผงแสดงผลงาน (Mission Log / Modules) */
         .showcase-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
         }
-
         @media (min-width: 500px) {
             .showcase-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
-
         .showcase-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(30, 58, 95, 0.6);
+            padding: 20px;
             transition: all 0.3s ease;
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
         }
-
         .showcase-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(0, 242, 254, 0.3);
+            background: rgba(10, 17, 30, 0.6);
+            border-color: #00f2fe;
             transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
         }
-
+        .item-icon {
+            font-size: 26px;
+            color: #00f2fe;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+        }
         .showcase-title {
+            font-family: 'Orbitron', 'Prompt', sans-serif;
             font-size: 15px;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
         }
-
         .showcase-desc {
             font-size: 12px;
-            color: #94a3b8;
-        }
-
-        .item-icon {
-            font-size: 24px;
-            color: #00f2fe;
-            margin-bottom: 10px;
+            color: #8fa0ba;
         }
     </style>
 </head>
@@ -237,69 +280,15 @@
 
     <div class="container">
         
-        <!-- ฝั่งซ้าย: ข้อมูลส่วนตัวหลัก -->
-        <div class="neon-box profile-side">
-            <div class="avatar-wrapper">
-                <!-- ใส่ลิงก์รูปภาพ Isagi เรียบร้อยแล้วครับ -->
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY-LfjXbZT6VHNsz1wJG-5LeTht28FoyJhU1mg3ovDig&s=10" alt="Profile" class="profile-img">
-                <span class="status-badge">ONLINE</span>
+        <!-- ฝั่งซ้าย: ข้อมูลส่วนตัวหลัก (AI CORE PANEL) -->
+        <div class="robot-panel profile-side">
+            <div class="avatar-container">
+                <!-- รูปภาพโปรไฟล์สไตล์เป้าเล็งหุ่นยนต์ -->
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY-LfjXbZT6VHNsz1wJG-5LeTht28FoyJhU1mg3ovDig&s=10" alt="Robot Core" class="profile-img">
+                <span class="status-badge">SYS ACTIVE</span>
             </div>
             
             <h1 class="name">นันทวัฒน์ กุลจันทร์</h1>
-            <p class="gamer-tag">@WebDev_Gamer</p>
+            <p class="gamer-tag">Core // @WebDev_Gamer</p>
             
             <p class="bio">
-                ยินดีที่ได้รู้จักครับ! ผมเป็นนักพัฒนาเว็บสายเลือดเกมเมอร์ ที่หลงใหลในการเขียนโค้ดและหลงรักในการกดสูตรคอมโบ รักความท้าทายทั้งในโลกของโปรแกรมมิ่งและในสมรภูมิเกมครับ
-            </p>
-            
-            <!-- โซเชียลมีเดีย -->
-            <div class="social-grid">
-                <a href="https://github.com" target="_blank" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="mailto:your-email@example.com" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
-                <a href="https://discord.com" target="_blank" class="social-btn" title="Discord"><i class="fab fa-discord"></i></a>
-            </div>
-        </div>
-        
-        <!-- ฝั่งขวา: รายละเอียดทักษะและสไตล์ -->
-        <div class="content-side">
-            
-            <!-- ส่วนทักษะ -->
-            <div class="neon-box">
-                <h2 class="section-title"><i class="fas fa-code"></i> Tech Arsenal (ทักษะโปรแกรมมิ่ง)</h2>
-                <div class="skills-grid">
-                    <span class="skill-badge">HTML5</span>
-                    <span class="skill-badge">CSS3 / Flexbox</span>
-                    <span class="skill-badge">JavaScript</span>
-                    <span class="skill-badge">Git & GitHub</span>
-                    <span class="skill-badge">Responsive Design</span>
-                    <span class="skill-badge">UI/UX Design</span>
-                </div>
-            </div>
-            
-            <!-- ส่วนโชว์ผลงานและเกมโปรด -->
-            <div class="neon-box">
-                <h2 class="section-title"><i class="fas fa-gamepad"></i> My Showcase & Interests</h2>
-                <div class="showcase-grid">
-                    
-                    <div class="showcase-item">
-                        <div class="item-icon"><i class="fas fa-laptop-code"></i></div>
-                        <h3 class="showcase-title">Web Projects</h3>
-                        <p class="showcase-desc">สร้างสรรค์เว็บเพจที่ตอบสนองไว โหลดเร็ว และมีดีไซน์ที่สวยงามรองรับทุกอุปกรณ์</p>
-                    </div>
-                    
-                    <div class="showcase-item">
-                        <div class="item-icon"><i class="fas fa-trophy"></i></div>
-                        <h3 class="showcase-title">Gaming Zone</h3>
-                        <p class="showcase-desc">ชอบเล่นเกมแนว Open-World, RPG และ FPS ที่ต้องใช้การวางกลยุทธ์และการตัดสินใจที่แม่นยำ</p>
-                    </div>
-                    
-                </div>
-            </div>
-            
-        </div>
-        
-    </div>
-
-</body>
-</html>
